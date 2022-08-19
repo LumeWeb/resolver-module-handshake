@@ -10,6 +10,7 @@ import {
   resolverEmptyResponse,
   ResolverModule,
   ResolverOptions,
+  resolveSuccess,
 } from "@lumeweb/resolver-common";
 import { getTld } from "@lumeweb/resolver-common";
 import { DNSRecord } from "@lumeweb/resolver-common";
@@ -110,6 +111,10 @@ export default class Handshake extends AbstractResolverModule {
           break;
         }
       }
+    }
+
+    if (0 < records.length) {
+      return resolveSuccess(records);
     }
 
     return resolverEmptyResponse();
