@@ -5,7 +5,11 @@ const HIP5_EXTENSIONS = ["eth", "_eth"];
 export default class Handshake extends AbstractResolverModule {
     async buildBlacklist() {
         const blacklist = new Set();
-        for (const resolver of this.resolver.resolvers) {
+        let resolvers = this.resolver.resolvers;
+        if (isPromise(resolvers)) {
+            resolvers = await resolvers;
+        }
+        for (const resolver of resolvers) {
             let tlds = resolver.getSupportedTlds();
             if (isPromise(tlds)) {
                 tlds = await tlds;
