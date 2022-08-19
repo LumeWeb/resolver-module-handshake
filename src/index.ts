@@ -5,29 +5,30 @@ import {
   DNSResult,
   isDomain,
   isIp,
+  isPromise,
   normalizeDomain,
   resolverEmptyResponse,
+  ResolverModule,
   ResolverOptions,
 } from "@lumeweb/resolver-common";
-import type { ResolverRegistry } from "@lumeweb/resolver";
 import { getTld } from "@lumeweb/resolver-common";
 import { DNSRecord } from "@lumeweb/resolver-common";
 
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 
 export default class Handshake extends AbstractResolverModule {
-  /*    private tldBlacklist: string[] = [];
+  private async buildBlacklist(): Promise<Set<string>> {
+    const blacklist = new Set<string>();
+    for (const resolver: ResolverModule of this.resolver.resolvers) {
+      let tlds = resolver.getSupportedTlds();
+      if (isPromise(tlds as any)) {
+        tlds = await tlds;
+      }
+      tlds.map((item) => blacklist.add(item));
+    }
 
-      constructor(resolver: ResolverRegistry) {
-          super(resolver);
-
-          for (const subresolver of resolver.resolvers) {
-              this.tldBlacklist = [
-                  ...this.tldBlacklist,
-                  ...subresolver.getSupportedTlds(),
-              ];
-          }
-      }*/
+    return blacklist;
+  }
 
   async resolve(
     domain: string,
@@ -36,11 +37,11 @@ export default class Handshake extends AbstractResolverModule {
   ): Promise<DNSResult> {
     const tld = getTld(domain);
 
-    /*
-        if (this.tldBlacklist.includes(tld)) {
-          return false;
-        }
-    */
+    const blacklist = await this.buildBlacklist();
+
+    if (blacklist.has(tld)) {
+      return resolverEmptyResponse();
+    }
 
     if (isIp(domain)) {
       return resolverEmptyResponse();

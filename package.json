@@ -2,7 +2,6 @@
     "name": "@lumeweb/resolver-module-handshake",
     "version": "0.1.0",
     "dependencies": {
-        "@lumeweb/resolver": "github:LumeWeb/resolver#modular",
         "@lumeweb/resolver-common": "github:LumeWeb/resolver-common",
         "@lumeweb/tld-enum": "github:LumeWeb/list-of-top-level-domains"
     }
