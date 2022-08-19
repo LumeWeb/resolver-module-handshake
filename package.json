@@ -1,6 +1,8 @@
 {
     "name": "@lumeweb/resolver-module-handshake",
     "version": "0.1.0",
+    "main": "dist/index.js",
+    "type": "module",
     "dependencies": {
         "@lumeweb/resolver-common": "github:LumeWeb/resolver-common",
         "@lumeweb/tld-enum": "github:LumeWeb/list-of-top-level-domains"
