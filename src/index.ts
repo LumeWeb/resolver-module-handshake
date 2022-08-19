@@ -59,7 +59,7 @@ export default class Handshake extends AbstractResolverModule {
       return resolverEmptyResponse();
     }
 
-    if ("subquery" in options.options) {
+    if ("subquery" in options?.options) {
       return resolverEmptyResponse();
     }
 
