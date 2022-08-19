@@ -204,6 +204,13 @@ export default class Handshake extends AbstractResolverModule {
     options: ResolverOptions,
     bypassCache: boolean
   ) {
+    if (
+      ![DNS_RECORD_TYPE.A, DNS_RECORD_TYPE.CNAME, DNS_RECORD_TYPE.NS].includes(
+        options.type
+      )
+    ) {
+      return;
+    }
     if (isDomain(record.ns) && isIp(record.address)) {
       let results = await this.resolver.resolve(
         domain,
