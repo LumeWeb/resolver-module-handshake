@@ -26,7 +26,12 @@ interface HnsRecord {
 export default class Handshake extends AbstractResolverModule {
   private async buildBlacklist(): Promise<Set<string>> {
     const blacklist = new Set<string>();
-    for (const resolver of this.resolver.resolvers) {
+    let resolvers = this.resolver.resolvers;
+    if (isPromise(resolvers as any)) {
+      resolvers = await resolvers;
+    }
+
+    for (const resolver of resolvers) {
       let tlds = resolver.getSupportedTlds();
       if (isPromise(tlds as any)) {
         tlds = await tlds;
