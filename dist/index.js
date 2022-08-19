@@ -1,5 +1,5 @@
 import tldEnum from "@lumeweb/tld-enum";
-import { AbstractResolverModule, DNS_RECORD_TYPE, isDomain, isIp, isPromise, normalizeDomain, resolverEmptyResponse, } from "@lumeweb/resolver-common";
+import { AbstractResolverModule, DNS_RECORD_TYPE, isDomain, isIp, isPromise, normalizeDomain, resolverEmptyResponse, resolveSuccess, } from "@lumeweb/resolver-common";
 import { getTld } from "@lumeweb/resolver-common";
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 export default class Handshake extends AbstractResolverModule {
@@ -73,6 +73,9 @@ export default class Handshake extends AbstractResolverModule {
                     break;
                 }
             }
+        }
+        if (0 < records.length) {
+            return resolveSuccess(records);
         }
         return resolverEmptyResponse();
     }
