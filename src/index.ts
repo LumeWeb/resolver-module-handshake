@@ -16,10 +16,17 @@ import { DNSRecord } from "@lumeweb/resolver-common";
 
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 
+interface HnsRecord {
+  type: string;
+  address: string;
+  txt: string[];
+  ns: string;
+}
+
 export default class Handshake extends AbstractResolverModule {
   private async buildBlacklist(): Promise<Set<string>> {
     const blacklist = new Set<string>();
-    for (const resolver: ResolverModule of this.resolver.resolvers) {
+    for (const resolver of this.resolver.resolvers) {
       let tlds = resolver.getSupportedTlds();
       if (isPromise(tlds as any)) {
         tlds = await tlds;
@@ -58,7 +65,7 @@ export default class Handshake extends AbstractResolverModule {
 
     let records: DNSRecord[] = [];
 
-    for (const record of chainRecords) {
+    for (const record of chainRecords as HnsRecord[]) {
       switch (record.type) {
         case "NS": {
           await this.processNs(domain, record, records, options, bypassCache);
@@ -106,8 +113,8 @@ export default class Handshake extends AbstractResolverModule {
   // @ts-ignore
   private async processNs(
     domain: string,
-    record,
-    records,
+    record: HnsRecord,
+    records: DNSRecord[],
     options: ResolverOptions,
     bypassCache: boolean
   ) {
@@ -187,7 +194,7 @@ export default class Handshake extends AbstractResolverModule {
 
   private async processGlue(
     domain: string,
-    record: any,
+    record: HnsRecord,
     records: DNSRecord[],
     options: ResolverOptions,
     bypassCache: boolean
@@ -210,7 +217,7 @@ export default class Handshake extends AbstractResolverModule {
     }
   }
 
-  private async query(tld: string, force: boolean): Promise<object | boolean> {
+  private async query(tld: string, force: boolean): Promise<[] | boolean> {
     const query = this.resolver.rpcNetwork.query(
       "getnameresource",
       "hns",
@@ -224,11 +231,11 @@ export default class Handshake extends AbstractResolverModule {
   }
 
   private async processTxt(
-    record: any,
+    record: HnsRecord,
     records: DNSRecord[],
     options: ResolverOptions
-  ): Promise<string | boolean> {
-    const content = record.txt.slice().pop();
+  ) {
+    const content = record.txt.slice().pop() as string;
 
     if (
       [DNS_RECORD_TYPE.TEXT, DNS_RECORD_TYPE.CONTENT].includes(options.type)
