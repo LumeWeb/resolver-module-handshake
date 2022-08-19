@@ -27,7 +27,7 @@ export default class Handshake extends AbstractResolverModule {
         if (isIp(domain)) {
             return resolverEmptyResponse();
         }
-        if ("subquery" in options.options) {
+        if ("subquery" in options?.options) {
             return resolverEmptyResponse();
         }
         const chainRecords = await this.query(tld, bypassCache);
