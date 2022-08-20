@@ -3,10 +3,10 @@
 		"target": "es2021",
 		"declaration": true,
 		"moduleResolution": "node",
-		"outDir": "./dist",
+		"outDir": "./dist-module",
 		"strict": true,
         "allowSyntheticDefaultImports": true
     },
-	"include": ["src"],
+	"include": ["src-module"],
 	"exclude": ["node_modules", "**/__tests__/*"]
 }
