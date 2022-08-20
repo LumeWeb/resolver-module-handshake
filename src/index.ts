@@ -8,7 +8,6 @@ import {
   isPromise,
   normalizeDomain,
   resolverEmptyResponse,
-  ResolverModule,
   ResolverOptions,
   resolveSuccess,
 } from "@lumeweb/resolver-common";
@@ -48,6 +47,7 @@ export default class Handshake extends AbstractResolverModule {
     options: ResolverOptions,
     bypassCache: boolean
   ): Promise<DNSResult> {
+    options.options = options.options || {};
     const tld = getTld(domain);
 
     const blacklist = await this.buildBlacklist();
@@ -74,7 +74,14 @@ export default class Handshake extends AbstractResolverModule {
     for (const record of chainRecords as HnsRecord[]) {
       switch (record.type) {
         case "NS": {
-          await this.processNs(domain, record, records, options, bypassCache);
+          await this.processNs(
+            domain,
+            record,
+            records,
+            chainRecords as HnsRecord[],
+            options,
+            bypassCache
+          );
           break;
         }
         case "GLUE4": {
@@ -113,6 +120,10 @@ export default class Handshake extends AbstractResolverModule {
       }
     }
 
+    records = [
+      ...new Set(records.map((item: DNSRecord) => JSON.stringify(item))),
+    ].map((item) => JSON.parse(item));
+
     if (0 < records.length) {
       return resolveSuccess(records);
     }
@@ -125,6 +136,7 @@ export default class Handshake extends AbstractResolverModule {
     domain: string,
     record: HnsRecord,
     records: DNSRecord[],
+    hnsRecords: HnsRecord[],
     options: ResolverOptions,
     bypassCache: boolean
   ) {
@@ -136,26 +148,31 @@ export default class Handshake extends AbstractResolverModule {
       return;
     }
     // @ts-ignore
-    const glue = records.slice().find(
+    const glue = hnsRecords.slice().find(
       (item: object) =>
         // @ts-ignore
         ["GLUE4", "GLUE6"].includes(item.type) && item.ns === record.ns
     );
 
-    if (glue) {
-      return this.processGlue(domain, record, records, options, bypassCache);
+    if (glue && options.type !== DNS_RECORD_TYPE.NS) {
+      return this.processGlue(domain, glue, records, options, bypassCache);
+    }
+
+    if (options.type === DNS_RECORD_TYPE.NS) {
+      records.push({ type: options.type, value: record.ns });
+      return;
     }
 
     const foundDomain = normalizeDomain(record.ns);
-    let isIcann = false;
 
+    let isIcann = false;
     let isHip5 = false;
 
     let hip5Parts = foundDomain.split(".");
 
     if (
       hip5Parts.length >= 2 &&
-      [...options.options?.hip5, ...HIP5_EXTENSIONS].includes(
+      [...(options.options?.hip5 ?? []), ...HIP5_EXTENSIONS].includes(
         hip5Parts[hip5Parts.length - 1]
       )
     ) {
@@ -184,6 +201,8 @@ export default class Handshake extends AbstractResolverModule {
             },
           });
         }
+
+        return resolverEmptyResponse();
       }
 
       return this.resolver.resolve(domain, {
@@ -209,11 +228,7 @@ export default class Handshake extends AbstractResolverModule {
     options: ResolverOptions,
     bypassCache: boolean
   ) {
-    if (
-      ![DNS_RECORD_TYPE.A, DNS_RECORD_TYPE.CNAME, DNS_RECORD_TYPE.NS].includes(
-        options.type
-      )
-    ) {
+    if (![DNS_RECORD_TYPE.A, DNS_RECORD_TYPE.CNAME].includes(options.type)) {
       return;
     }
     if (isDomain(record.ns) && isIp(record.address)) {
