@@ -197,7 +197,7 @@ export default class Handshake extends AbstractResolverModule {
             ...options,
             options: {
               subquery: true,
-              nameserver: hnsNs.records.pop(),
+              nameserver: hnsNs.records.pop()?.value,
             },
           });
         }
