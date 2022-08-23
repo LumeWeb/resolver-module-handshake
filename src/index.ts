@@ -193,22 +193,31 @@ export default class Handshake extends AbstractResolverModule {
         const hnsNs = await this.resolver.resolve(foundDomain, options);
 
         if (hnsNs.records.length) {
-          return this.resolver.resolve(domain, {
+          let icannRecords = await this.resolver.resolve(domain, {
             ...options,
             options: {
               subquery: true,
               nameserver: hnsNs.records.pop()?.value,
             },
           });
+          if (icannRecords.records.length) {
+            records.push.apply(records, icannRecords.records);
+          }
         }
 
         return resolverEmptyResponse();
       }
 
-      return this.resolver.resolve(domain, {
+      let icannRecords = await this.resolver.resolve(domain, {
         ...options,
         options: { subquery: true, nameserver: foundDomain },
       });
+      if (icannRecords.records.length) {
+        records.push.apply(records, icannRecords.records);
+        return;
+      }
+
+      return resolverEmptyResponse();
     }
 
     let result = await this.resolver.resolve(record.ns, options, bypassCache);
