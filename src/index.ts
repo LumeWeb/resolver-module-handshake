@@ -10,9 +10,10 @@ import {
   resolverEmptyResponse,
   ResolverOptions,
   resolveSuccess,
-} from "@lumeweb/resolver-common";
-import { getTld } from "@lumeweb/resolver-common";
-import { DNSRecord } from "@lumeweb/resolver-common";
+  ensureUniqueRecords,
+  DNSRecord,
+  getTld,
+} from "@lumeweb/libresolver";
 
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 
@@ -120,9 +121,7 @@ export default class Handshake extends AbstractResolverModule {
       }
     }
 
-    records = [
-      ...new Set(records.map((item: DNSRecord) => JSON.stringify(item))),
-    ].map((item) => JSON.parse(item));
+    records = ensureUniqueRecords(records);
 
     if (0 < records.length) {
       return resolveSuccess(records);
