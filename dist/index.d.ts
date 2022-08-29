@@ -2,7 +2,7 @@ import {
   AbstractResolverModule,
   DNSResult,
   ResolverOptions,
-} from "@lumeweb/resolver-common";
+} from "@lumeweb/libresolver";
 export default class Handshake extends AbstractResolverModule {
   private buildBlacklist;
   resolve(
