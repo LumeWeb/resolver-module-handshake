@@ -15,6 +15,7 @@
         "@lumeweb/tld-enum": "github:LumeWeb/list-of-top-level-domains"
     },
     "devDependencies": {
+        "@lumeweb/relay-types": "https://github.com/LumeWeb/relay-types.git",
         "@types/node": "^18.7.8",
         "@types/read": "^0.0.29",
         "esbuild": "^0.15.5",
