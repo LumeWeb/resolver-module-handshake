@@ -263,7 +263,7 @@ export default class Handshake extends AbstractResolverModule {
   ): Promise<[] | boolean> {
     const query = this.resolver.rpcNetwork.wisdomQuery(
       "getnameresource",
-      "hns",
+      "handshake",
       [tld],
       bypassCache
     );
