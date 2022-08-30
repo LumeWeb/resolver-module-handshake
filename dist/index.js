@@ -161,7 +161,7 @@ export default class Handshake extends AbstractResolverModule {
         }
     }
     async query(tld, bypassCache) {
-        const query = this.resolver.rpcNetwork.wisdomQuery("getnameresource", "hns", [tld], bypassCache);
+        const query = this.resolver.rpcNetwork.wisdomQuery("getnameresource", "handshakearn build", [tld], bypassCache);
         const resp = await query.result;
         // @ts-ignore
         return resp?.records || [];
