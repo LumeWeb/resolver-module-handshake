@@ -13,7 +13,9 @@ import {
   ensureUniqueRecords,
   DNSRecord,
   getTld,
+  resolverError,
 } from "@lumeweb/libresolver";
+import { RPCResponse } from "@lumeweb/relay-types";
 
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 
@@ -22,6 +24,12 @@ interface HnsRecord {
   address: string;
   txt: string[];
   ns: string;
+}
+
+interface HandshakeRPCResponse extends RPCResponse {
+  data?: {
+    records: HnsRecord[];
+  };
 }
 
 export default class Handshake extends AbstractResolverModule {
@@ -66,13 +74,17 @@ export default class Handshake extends AbstractResolverModule {
     }
 
     const chainRecords = await this.query(tld, bypassCache);
-    if (!chainRecords) {
+    if (chainRecords.error) {
+      return resolverError(chainRecords.error);
+    }
+
+    if (!chainRecords.data?.records.length) {
       return resolverEmptyResponse();
     }
 
     let records: DNSRecord[] = [];
 
-    for (const record of chainRecords as HnsRecord[]) {
+    for (const record of chainRecords.data?.records) {
       switch (record.type) {
         case "NS": {
           await this.processNs(
@@ -260,17 +272,14 @@ export default class Handshake extends AbstractResolverModule {
   private async query(
     tld: string,
     bypassCache: boolean
-  ): Promise<[] | boolean> {
-    const query = this.resolver.rpcNetwork.wisdomQuery(
+  ): Promise<HandshakeRPCResponse> {
+    let query = this.resolver.rpcNetwork.wisdomQuery(
       "getnameresource",
       "handshake",
       [tld],
       bypassCache
     );
-    const resp = await query.result;
-
-    // @ts-ignore
-    return resp?.records || [];
+    return (await query.result) as HandshakeRPCResponse;
   }
 
   private async processTxt(
