@@ -1,5 +1,5 @@
 import tldEnum from "@lumeweb/tld-enum";
-import { AbstractResolverModule, DNS_RECORD_TYPE, isDomain, isIp, isPromise, normalizeDomain, resolverEmptyResponse, resolveSuccess, ensureUniqueRecords, getTld, } from "@lumeweb/libresolver";
+import { AbstractResolverModule, DNS_RECORD_TYPE, isDomain, isIp, isPromise, normalizeDomain, resolverEmptyResponse, resolveSuccess, ensureUniqueRecords, getTld, resolverError, } from "@lumeweb/libresolver";
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 export default class Handshake extends AbstractResolverModule {
     async buildBlacklist() {
@@ -31,11 +31,14 @@ export default class Handshake extends AbstractResolverModule {
             return resolverEmptyResponse();
         }
         const chainRecords = await this.query(tld, bypassCache);
-        if (!chainRecords) {
+        if (chainRecords.error) {
+            return resolverError(chainRecords.error);
+        }
+        if (!chainRecords.data?.records.length) {
             return resolverEmptyResponse();
         }
         let records = [];
-        for (const record of chainRecords) {
+        for (const record of chainRecords.data?.records) {
             switch (record.type) {
                 case "NS": {
                     await this.processNs(domain, record, records, chainRecords, options, bypassCache);
@@ -161,10 +164,8 @@ export default class Handshake extends AbstractResolverModule {
         }
     }
     async query(tld, bypassCache) {
-        const query = this.resolver.rpcNetwork.wisdomQuery("getnameresource", "handshakearn build", [tld], bypassCache);
-        const resp = await query.result;
-        // @ts-ignore
-        return resp?.records || [];
+        let query = this.resolver.rpcNetwork.wisdomQuery("getnameresource", "handshake", [tld], bypassCache);
+        return (await query.result);
     }
     async processTxt(record, records, options) {
         const content = record.txt.slice().pop();
