@@ -91,7 +91,7 @@ export default class Handshake extends AbstractResolverModule {
             domain,
             record,
             records,
-            chainRecords as HnsRecord[],
+            chainRecords.data?.records,
             options,
             bypassCache
           );
