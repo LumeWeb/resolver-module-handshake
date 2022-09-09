@@ -41,7 +41,7 @@ export default class Handshake extends AbstractResolverModule {
         for (const record of chainRecords.data?.records) {
             switch (record.type) {
                 case "NS": {
-                    await this.processNs(domain, record, records, chainRecords, options, bypassCache);
+                    await this.processNs(domain, record, records, chainRecords.data?.records, options, bypassCache);
                     break;
                 }
                 case "GLUE4": {
