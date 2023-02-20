@@ -10,16 +10,23 @@
         "build-module": "npm run compile-module && node ./dist-build/build.mjs dev"
     },
     "dependencies": {
-        "@lumeweb/kernel-libresolver": "https://github.com/LumeWeb/kernel-libresolver.git",
-        "@lumeweb/libresolver": "https://github.com/LumeWeb/libresolver.git",
-        "@lumeweb/tld-enum": "github:LumeWeb/list-of-top-level-domains"
+        "@lumeweb/kernel-handshake-client": "git+https://git.lumeweb.com/LumeWeb/kernel-handshake-client.git",
+        "@lumeweb/kernel-libresolver": "git+https://git.lumeweb.com/LumeWeb/kernel-libresolver.git",
+        "@lumeweb/libresolver": "git+https://git.lumeweb.com/LumeWeb/libresolver.git",
+        "@lumeweb/tld-enum": "git+https://git.lumeweb.com/LumeWeb/list-of-top-level-domains.git"
     },
     "devDependencies": {
-        "@lumeweb/relay-types": "https://github.com/LumeWeb/relay-types.git",
-        "@types/node": "^18.7.8",
+        "@lumeweb/cfg": "git+https://git.lumeweb.com/LumeWeb/cfg.git",
+        "@lumeweb/relay-types": "git+https://git.lumeweb.com/LumeWeb/relay-types.git",
+        "@scure/bip39": "^1.1.1",
+        "@skynetlabs/skynet-nodejs": "^2.9.0",
+        "@types/node": "^18.14.0",
         "@types/read": "^0.0.29",
-        "esbuild": "^0.15.5",
+        "cli-progress": "^3.12.0",
+        "esbuild": "^0.15.18",
         "libskynetnode": "^0.1.4",
-        "read": "^1.0.7"
+        "node-cache": "^5.1.2",
+        "read": "^1.0.7",
+        "typescript": "^4.9.5"
     }
 }

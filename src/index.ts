@@ -15,7 +15,13 @@ import {
   getTld,
   resolverError,
 } from "@lumeweb/libresolver";
-import { RPCResponse } from "@lumeweb/relay-types";
+import {
+  createClient,
+  Response as HandshakeResponse,
+} from "@lumeweb/kernel-handshake-client";
+import { ResolverModule } from "@lumeweb/kernel-libresolver";
+
+const client = createClient();
 
 const HIP5_EXTENSIONS = ["eth", "_eth"];
 
@@ -26,26 +32,20 @@ interface HnsRecord {
   ns: string;
 }
 
-interface HandshakeRPCResponse extends RPCResponse {
-  data?: {
-    records: HnsRecord[];
-  };
-}
-
 export default class Handshake extends AbstractResolverModule {
   private async buildBlacklist(): Promise<Set<string>> {
     const blacklist = new Set<string>();
-    let resolvers = this.resolver.resolvers;
+    let resolvers = this.resolver.resolvers as unknown as Set<ResolverModule>;
     if (isPromise(resolvers as any)) {
       resolvers = await resolvers;
     }
 
     for (const resolver of resolvers) {
-      let tlds = resolver.getSupportedTlds();
+      let tlds: string[] | Promise<string[]> = resolver.getSupportedTlds();
       if (isPromise(tlds as any)) {
         tlds = await tlds;
       }
-      tlds.map((item) => blacklist.add(item));
+      (tlds as string[]).map((item: string) => blacklist.add(item));
     }
 
     return blacklist;
@@ -73,25 +73,25 @@ export default class Handshake extends AbstractResolverModule {
       return resolverEmptyResponse();
     }
 
-    const chainRecords = await this.query(tld, bypassCache);
+    const chainRecords = await this.query(tld);
     if (chainRecords.error) {
       return resolverError(chainRecords.error);
     }
 
-    if (!chainRecords.data?.records.length) {
+    if (!chainRecords.result?.records.length) {
       return resolverEmptyResponse();
     }
 
     let records: DNSRecord[] = [];
 
-    for (const record of chainRecords.data?.records) {
+    for (const record of chainRecords.result?.records) {
       switch (record.type) {
         case "NS": {
           await this.processNs(
             domain,
             record,
             records,
-            chainRecords.data?.records,
+            chainRecords.result?.records,
             options,
             bypassCache
           );
@@ -269,17 +269,8 @@ export default class Handshake extends AbstractResolverModule {
     }
   }
 
-  private async query(
-    tld: string,
-    bypassCache: boolean
-  ): Promise<HandshakeRPCResponse> {
-    let query = this.resolver.rpcNetwork.wisdomQuery(
-      "getnameresource",
-      "handshake",
-      [tld],
-      bypassCache
-    );
-    return (await query.result) as HandshakeRPCResponse;
+  private async query(tld: string): Promise<HandshakeResponse> {
+    return client.query("getnameresource", [tld, true]);
   }
 
   private async processTxt(

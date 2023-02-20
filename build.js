@@ -3,7 +3,7 @@ import esbuild from "esbuild"
 esbuild.buildSync({
     entryPoints: ['src-module/index.ts'],
     outfile: 'dist-module/index.js',
-    format: 'esm',
+    format: 'iife',
     bundle: true,
     legalComments: 'external',
     //  minify: true
