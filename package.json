@@ -18,9 +18,9 @@
     "devDependencies": {
         "@lumeweb/cfg": "git+https://git.lumeweb.com/LumeWeb/cfg.git",
         "@lumeweb/relay-types": "git+https://git.lumeweb.com/LumeWeb/relay-types.git",
-        "@scure/bip39": "^1.1.1",
+        "@scure/bip39": "^1.2.0",
         "@skynetlabs/skynet-nodejs": "^2.9.0",
-        "@types/node": "^18.14.0",
+        "@types/node": "^18.15.11",
         "@types/read": "^0.0.29",
         "cli-progress": "^3.12.0",
         "esbuild": "^0.15.18",
