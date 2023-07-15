@@ -1,10 +1,9 @@
 {
     "name": "@lumeweb/resolver-module-handshake",
-    "version": "0.1.0",
+    "version": "0.0.2-develop.1",
     "main": "lib/index.js",
     "type": "module",
     "readme": "ERROR: No README data found!",
-    "_id": "@lumeweb/resolver-module-handshake@0.1.0",
     "repository": {
         "type": "git",
         "url": "gitea@git.lumeweb.com:LumeWeb/resolver-module-handshake.git"
