@@ -20,6 +20,6 @@
         "@lumeweb/tld-enum": "^0.1.0-develop.1"
     },
     "devDependencies": {
-        "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.1"
+        "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.43"
     }
 }
