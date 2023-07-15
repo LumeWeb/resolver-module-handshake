@@ -1,32 +1,25 @@
 {
     "name": "@lumeweb/resolver-module-handshake",
     "version": "0.1.0",
-    "main": "dist/index.js",
+    "main": "lib/index.js",
     "type": "module",
+    "readme": "ERROR: No README data found!",
+    "_id": "@lumeweb/resolver-module-handshake@0.1.0",
+    "repository": {
+        "type": "git",
+        "url": "gitea@git.lumeweb.com:LumeWeb/resolver-module-handshake.git"
+    },
     "scripts": {
-        "build-script": "tsc --project tsconfig.build.json && mv dist-build/build.js dist-build/build.mjs",
-        "compile-module": "npm run build-script && node build.js",
-        "build": "tsc --project tsconfig.json",
-        "build-module": "npm run compile-module && node ./dist-build/build.mjs dev"
+        "prepare": "presetter bootstrap",
+        "build": "run build",
+        "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "@lumeweb/kernel-handshake-client": "git+https://git.lumeweb.com/LumeWeb/kernel-handshake-client.git",
-        "@lumeweb/kernel-libresolver": "git+https://git.lumeweb.com/LumeWeb/kernel-libresolver.git",
-        "@lumeweb/libresolver": "git+https://git.lumeweb.com/LumeWeb/libresolver.git",
-        "@lumeweb/tld-enum": "git+https://git.lumeweb.com/LumeWeb/list-of-top-level-domains.git"
+        "@lumeweb/kernel-handshake-client": "^0.0.2-develop.4",
+        "@lumeweb/kernel-libresolver": "^0.1.0-develop.3",
+        "@lumeweb/tld-enum": "^0.1.0-develop.1"
     },
     "devDependencies": {
-        "@lumeweb/cfg": "git+https://git.lumeweb.com/LumeWeb/cfg.git",
-        "@lumeweb/relay-types": "git+https://git.lumeweb.com/LumeWeb/relay-types.git",
-        "@scure/bip39": "^1.2.0",
-        "@skynetlabs/skynet-nodejs": "^2.9.0",
-        "@types/node": "^18.15.11",
-        "@types/read": "^0.0.29",
-        "cli-progress": "^3.12.0",
-        "esbuild": "^0.15.18",
-        "libskynetnode": "^0.1.4",
-        "node-cache": "^5.1.2",
-        "read": "^1.0.7",
-        "typescript": "^4.9.5"
+        "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.1"
     }
 }
