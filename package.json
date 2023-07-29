@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "@lumeweb/kernel-handshake-client": "0.0.2-develop.17",
-        "@lumeweb/kernel-libresolver": "^0.1.0-develop.3",
+        "@lumeweb/kernel-libresolver": "^0.1.0-develop.6",
         "@lumeweb/tld-enum": "^0.1.0-develop.1"
     },
     "devDependencies": {

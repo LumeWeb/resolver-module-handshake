@@ -9,7 +9,7 @@
             "version": "0.0.2-develop.2",
             "dependencies": {
                 "@lumeweb/kernel-handshake-client": "0.0.2-develop.17",
-                "@lumeweb/kernel-libresolver": "^0.1.0-develop.3",
+                "@lumeweb/kernel-libresolver": "^0.1.0-develop.6",
                 "@lumeweb/tld-enum": "^0.1.0-develop.1"
             },
             "devDependencies": {
@@ -1678,11 +1678,11 @@
             }
         },
         "node_modules/@lumeweb/kernel-dns-client": {
-            "version": "0.1.0-develop.2",
-            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-dns-client/-/kernel-dns-client-0.1.0-develop.2.tgz",
-            "integrity": "sha512-Iz1H5qTQPIq7o4XP+E5K3iFWxcp8Wq6d/qN5Rrb8WT6I25RgTDAkcSTaEXfKNBNFKadpk7TEQQQirhASzkBTmg==",
+            "version": "0.1.0-develop.4",
+            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-dns-client/-/kernel-dns-client-0.1.0-develop.4.tgz",
+            "integrity": "sha512-PjS23UG5uMaheig7QhDu9E8u1IaR4xpdyznnjhErv1F0xH0v+ST8owwkZN7qDT8ksAUPykqiWP03ztmXs3PoQw==",
             "dependencies": {
-                "@lumeweb/libkernel": "^0.1.0-develop.16",
+                "@lumeweb/libkernel": "^0.1.0-develop.31",
                 "@lumeweb/libresolver": "^0.1.0-develop.1"
             }
         },
@@ -1695,19 +1695,19 @@
             }
         },
         "node_modules/@lumeweb/kernel-libresolver": {
-            "version": "0.1.0-develop.3",
-            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-libresolver/-/kernel-libresolver-0.1.0-develop.3.tgz",
-            "integrity": "sha512-L9R697iKcWQk8pixAvSO8kTI5Mybavli24BpuI2UauGRJTSSL09fpKQdTG6KoxG5ne9/n41/UkuJORnXJSu3nQ==",
+            "version": "0.1.0-develop.6",
+            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-libresolver/-/kernel-libresolver-0.1.0-develop.6.tgz",
+            "integrity": "sha512-55r0Ahx2X86oapszTvICvyA8QvzIg6QnyTsNVV9WTkDn88vYAyyT9gsRuXStjCxqqwtx3NqDd8zVasG4/PWqzQ==",
             "dependencies": {
-                "@lumeweb/kernel-dns-client": "^0.1.0-develop.2",
-                "@lumeweb/libkernel": "^0.1.0-develop.14",
+                "@lumeweb/kernel-dns-client": "^0.1.0-develop.4",
+                "@lumeweb/libkernel": "^0.1.0-develop.32",
                 "@lumeweb/libresolver": "^0.1.0-develop.1"
             }
         },
         "node_modules/@lumeweb/libkernel": {
-            "version": "0.1.0-develop.31",
-            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.31.tgz",
-            "integrity": "sha512-uTyK2yvAvCo6hQAYILkl+Abfto0ky5ZB6UFg+LkMY2xG6KjdIxzgragQ4dI2UWvwkDGaQM+jyvxI4Bqx4le6PA==",
+            "version": "0.1.0-develop.32",
+            "resolved": "https://registry.npmjs.org/@lumeweb/libkernel/-/libkernel-0.1.0-develop.32.tgz",
+            "integrity": "sha512-qnuZUdpaGttCRcLOgJgrksobzawlu/S7RD00AZPeySoH9NcrrNIi9YeQ+22Ncn2Q6nB9PVVfZvKkicck6avbSg==",
             "dependencies": {
                 "@lumeweb/libweb": "0.2.0-develop.27",
                 "emittery": "^1.0.1",
