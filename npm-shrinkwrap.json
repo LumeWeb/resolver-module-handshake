@@ -8,12 +8,12 @@
             "name": "@lumeweb/resolver-module-handshake",
             "version": "0.0.2-develop.1",
             "dependencies": {
-                "@lumeweb/kernel-handshake-client": "0.0.2-develop.16",
+                "@lumeweb/kernel-handshake-client": "0.0.2-develop.17",
                 "@lumeweb/kernel-libresolver": "^0.1.0-develop.3",
                 "@lumeweb/tld-enum": "^0.1.0-develop.1"
             },
             "devDependencies": {
-                "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.43"
+                "@lumeweb/presetter-kernel-module-preset": "^0.1.0-develop.44"
             }
         },
         "node_modules/@aashutoshrathi/word-wrap": {
@@ -1687,9 +1687,9 @@
             }
         },
         "node_modules/@lumeweb/kernel-handshake-client": {
-            "version": "0.0.2-develop.16",
-            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-handshake-client/-/kernel-handshake-client-0.0.2-develop.16.tgz",
-            "integrity": "sha512-lcAKfCyAq17ErrPc19VeU60x1dmvbqu0K3lMxW9NhyNnUDLU+H6ANHMyyxqiDVz8oX296iLLX1hb5kchJM7tUQ==",
+            "version": "0.0.2-develop.17",
+            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-handshake-client/-/kernel-handshake-client-0.0.2-develop.17.tgz",
+            "integrity": "sha512-6+LIfFKfl6kuInOmpNwsr7EoJJvZ0C6lPY3ANVqQkys1yc73LYyimPW6LPaNxQT9RQ8oVZZs/ku6cEgLVrsHwQ==",
             "dependencies": {
                 "@lumeweb/libkernel": "^0.1.0-develop.27"
             }
@@ -1789,9 +1789,9 @@
             }
         },
         "node_modules/@lumeweb/presetter-kernel-module-preset": {
-            "version": "0.1.0-develop.43",
-            "resolved": "https://registry.npmjs.org/@lumeweb/presetter-kernel-module-preset/-/presetter-kernel-module-preset-0.1.0-develop.43.tgz",
-            "integrity": "sha512-cRbE+P1R+qc2nUZZRjRcNuqab9bf8cecMp2QGAiqc/OM3C8VsSRatquB77wO+3VyyYNLbo71SBQ2TIxx1q6Mow==",
+            "version": "0.1.0-develop.44",
+            "resolved": "https://registry.npmjs.org/@lumeweb/presetter-kernel-module-preset/-/presetter-kernel-module-preset-0.1.0-develop.44.tgz",
+            "integrity": "sha512-e5vMyTQW/gS93mt9qWqvJTcRYS0Dhi+PdpZR3FMO8y7CEp6f56dwKGz60EXOQOQVBDUqDuipf2KXRDnf0/gjDw==",
             "dev": true,
             "dependencies": {
                 "@lumeweb/node-library-preset": "0.2.7",
