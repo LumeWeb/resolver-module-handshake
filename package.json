@@ -15,7 +15,7 @@
         "semantic-release": "semantic-release"
     },
     "dependencies": {
-        "@lumeweb/kernel-handshake-client": "^0.0.2-develop.4",
+        "@lumeweb/kernel-handshake-client": "0.0.2-develop.15",
         "@lumeweb/kernel-libresolver": "^0.1.0-develop.3",
         "@lumeweb/tld-enum": "^0.1.0-develop.1"
     },
