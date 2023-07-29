@@ -291,6 +291,6 @@ export default class Handshake extends AbstractResolverModule {
   }
 
   async ready() {
-    await client.ready();
+      return ((await client.status()) as any)?.ready;
   }
 }
