@@ -8,7 +8,7 @@
             "name": "@lumeweb/resolver-module-handshake",
             "version": "0.0.2-develop.4",
             "dependencies": {
-                "@lumeweb/kernel-handshake-client": "0.1.0-develop.2",
+                "@lumeweb/kernel-handshake-client": "0.1.0-develop.3",
                 "@lumeweb/kernel-libresolver": "^0.1.0-develop.6",
                 "@lumeweb/tld-enum": "^0.1.0-develop.1"
             },
@@ -1687,9 +1687,9 @@
             }
         },
         "node_modules/@lumeweb/kernel-handshake-client": {
-            "version": "0.1.0-develop.2",
-            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-handshake-client/-/kernel-handshake-client-0.1.0-develop.2.tgz",
-            "integrity": "sha512-N0i9CESdw3g6K7GRlPhX1HpkcBOFX/2hqVXXuT+ZCm36rNGgbfa2W7T0+saqLAcwxmrvwZhbaPrvFFpt3mIo0w==",
+            "version": "0.1.0-develop.3",
+            "resolved": "https://registry.npmjs.org/@lumeweb/kernel-handshake-client/-/kernel-handshake-client-0.1.0-develop.3.tgz",
+            "integrity": "sha512-B3MGC1V4IDoA5P599aWi+rXl7zxFaxgVvCW+DKyqBIFU1D1kfUIgj1D2wFLODiCmHP4LUeoIpR5o15XubzSwog==",
             "dependencies": {
                 "@lumeweb/libkernel": "^0.1.0-develop.27"
             }
