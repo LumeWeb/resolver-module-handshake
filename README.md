@@ -1,0 +1,3 @@
+# resolver-module-handshake
+
+Module CID: z3o47Yv7ZWsjhz4EXUhJfvUxPnjb6XYZnqm8jnwD8B4JfkcYy8B98c85xCgf
