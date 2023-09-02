@@ -1,3 +1,5 @@
+## [0.0.2-develop.8](https://git.lumeweb.com/LumeWeb/resolver-module-handshake/compare/v0.0.2-develop.7...v0.0.2-develop.8) (2023-09-02)
+
 ## [0.0.2-develop.7](https://git.lumeweb.com/LumeWeb/resolver-module-handshake/compare/v0.0.2-develop.6...v0.0.2-develop.7) (2023-08-04)
 
 ## [0.0.2-develop.6](https://git.lumeweb.com/LumeWeb/resolver-module-handshake/compare/v0.0.2-develop.5...v0.0.2-develop.6) (2023-08-03)
