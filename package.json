@@ -1,6 +1,6 @@
 {
     "name": "@lumeweb/resolver-module-handshake",
-    "version": "0.0.2-develop.8",
+    "version": "0.0.2-develop.9",
     "main": "lib/index.js",
     "type": "module",
     "readme": "ERROR: No README data found!",
