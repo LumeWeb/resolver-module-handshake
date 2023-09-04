@@ -1,3 +1,3 @@
 # resolver-module-handshake
 
-Module CID: zdiJqvUXCxDKvqiKFkTG6GXrVpPR71mGaNUMqjoTMJspGdSPaNN73c7HsD
+Module CID: zdiKj8qrXfXVBzE9pk2AVQmiQnegRfXj4MTjYqwQYBZ3Lkbasvfm12tebH
